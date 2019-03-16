@@ -17,6 +17,52 @@ function initWeatherForecasts() {
   }
 }
 
+function initDate() {
+  loadDate();
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./service-worker.js").then(function() {
+      console.log("Service Worker Registered");
+    });
+  }
+}
+
+function loadDate(date) {
+  console.log("loadDate working");
+  const input = JSON.stringify({});
+  $.ajax({
+    url: "/get_date",
+    data: input,
+    contentType: "application/json",
+    type: "POST",
+    success: function(data) {
+      addToPage(data);
+      updateStorage(data);
+      if (document.getElementById("offline_div") != null)
+        document.getElementById("offline_div").style.display = "none";
+    },
+    // the request to the server has failed. Let's show the cached data
+    error: function(xhr, status, error) {
+      showOfflineWarning();
+      addToPage(JSON.parse(localStorage.getItem("date")));
+      const dvv = document.getElementById("offline_div");
+      if (dvv != null) dvv.style.display = "block";
+    }
+  });
+}
+
+function updateStorage(date) {
+  console.log("updateStorage working", date);
+  localStorage.setItem("date", JSON.stringify(date));
+}
+
+function addToPage(date) {
+  console.log("addToPage working", date);
+  if (document.getElementById("date") != null) {
+    const element = document.getElementById("date");
+    element.innerHTML = date;
+  }
+}
+
 /**
  * given the list of cities created by the user, it will retrieve all teh data from
  * the server (or failing that) from the database

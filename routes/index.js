@@ -6,6 +6,21 @@ router.get("/", function(req, res, next) {
   res.render("index", { title: "Weather Forecast" });
 });
 
+/* GET date page. */
+router.get("/get_date", function(req, res, next) {
+  res.render("date", { title: "Get yo date" });
+});
+
+router.post("/get_date", function(req, res, next) {
+  const date = new Date();
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  var newDate = day + " / " + month + " / " + year;
+  res.setHeader("Content-Type", "application/json");
+  res.send(JSON.stringify(newDate));
+});
+
 /**
  *  POST the data about the weather.
  *  parameters in body:

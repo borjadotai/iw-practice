@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="canonical"
+      href="https://weather-pwa-sample.firebaseapp.com/final/"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date</title>
+    <link rel="stylesheet" href="/styles/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="styles/inline.css" />
+
+    <!-- TODO add manifest here -->
+    <link rel="manifest" href="/manifest.json" />
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Weather PWA" />
+    <link rel="apple-touch-icon" href="images/icons/icon-152x152.png" />
+    <meta
+      name="msapplication-TileImage"
+      content="images/icons/icon-144x144.png"
+    />
+    <meta name="msapplication-TileColor" content="#2F3BA2" />
+
+    <script src="/scripts/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="/scripts/bootstrap.min.js"></script>
+  </head>
+  <body onload="initDate()">
+    <div class="container" style="width: 100%">
+      <div class="row">
+        <div class="col-xs-10"><h1><%= title %></h1></div>
+        <div class="col-xs-10"><h2 id="date"></h2></div>
+      </div>
+      <div class="offline_div" id="offline_div" style="display: none">
+        You are offline
+      </div>
+    </div>
+    <script src="/scripts/app.js"></script>
+  </body>
+</html>
