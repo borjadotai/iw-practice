@@ -14,16 +14,14 @@
  *  is blocking. It would be best to implement it using indexedDB
  */
 
-
 /**
  * it saves the forecasts for a city in localStorage
  * @param city
  * @param forecastObject
  */
 function storeCachedData(city, forecastObject) {
-    localStorage.setItem(city, JSON.stringify(forecastObject));
+  localStorage.setItem(city, JSON.stringify(forecastObject));
 }
-
 
 /**
  * it retrieves the forecasts data for a city from localStorage
@@ -32,13 +30,10 @@ function storeCachedData(city, forecastObject) {
  * @returns {*}
  */
 function getCachedData(city, date) {
-    const value = localStorage.getItem(city);
-    if (value == null)
-        return {city: city, date: date}
-    else return JSON.parse(value);
+  const value = localStorage.getItem(city);
+  if (value == null) return { city: city, date: date };
+  else return JSON.parse(value);
 }
-
-
 
 /**
  * given the server data, it returns the value of the field precipitations
@@ -46,9 +41,9 @@ function getCachedData(city, date) {
  * @returns {*}
  */
 function getPrecipitations(dataR) {
-    if (dataR.precipitations == null && dataR.precipitations === undefined)
-           return "unavailable";
-    return dataR.precipitations
+  if (dataR.precipitations == null && dataR.precipitations === undefined)
+    return "unavailable";
+  return dataR.precipitations;
 }
 
 /**
@@ -56,10 +51,9 @@ function getPrecipitations(dataR) {
  * @param dataR the data returned by the server
  * @returns {*}
  */
-function getWind(dataR){
-    if (dataR.wind == null && dataR.wind === undefined)
-            return "unavailable";
-    else return dataR.wind;
+function getWind(dataR) {
+  if (dataR.wind == null && dataR.wind === undefined) return "unavailable";
+  else return dataR.wind;
 }
 
 /**
@@ -67,13 +61,22 @@ function getWind(dataR){
  * @param dataR the data returned by the server
  * @returns {*}
  */
-function getTemperature(dataR){
-    if (dataR.temperature == null && dataR.temperature === undefined)
-            return "unavailable";
-    else return dataR.temperature;
+function getTemperature(dataR) {
+  if (dataR.temperature == null && dataR.temperature === undefined)
+    return "unavailable";
+  else return dataR.temperature;
 }
 
-
+/**
+ * given the server data, it returns the value of the field humidity
+ * @param dataR the data returned by the server
+ * @returns {*}
+ */
+function getHumidity(dataR) {
+  if (dataR.humidity == null && dataR.humidity === undefined)
+    return "unavailable";
+  else return dataR.humidity;
+}
 
 /**
  * the server returns the forecast as a n integer. Here we find out the
@@ -82,18 +85,17 @@ function getTemperature(dataR){
  * @returns {string}
  */
 function getForecast(forecast) {
-    if (forecast == null && forecast === undefined)
-        return "unavailable";
-    switch (forecast) {
-        case CLOUDY:
-            return 'Cloudy';
-        case CLEAR:
-            return 'Clear';
-        case RAINY:
-            return 'Rainy';
-        case OVERCAST:
-            return 'Overcast';
-        case SNOWY:
-            return 'Snowy';
-    }
+  if (forecast == null && forecast === undefined) return "unavailable";
+  switch (forecast) {
+    case CLOUDY:
+      return "Cloudy";
+    case CLEAR:
+      return "Clear";
+    case RAINY:
+      return "Rainy";
+    case OVERCAST:
+      return "Overcast";
+    case SNOWY:
+      return "Snowy";
+  }
 }
